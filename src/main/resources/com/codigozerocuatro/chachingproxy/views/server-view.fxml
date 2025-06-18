@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane hgap="10" vgap="10"
+            xmlns="http://javafx.com/javafx/24"
+            xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.codigozerocuatro.chachingproxy.controller.ServerItemController"
+>
+    <Label text="Url" GridPane.rowIndex="0" GridPane.columnIndex="0" minWidth="80"/>
+    <TextField fx:id="urlField" GridPane.rowIndex="0" GridPane.columnIndex="1" HBox.hgrow="ALWAYS"/>
+
+    <Label text="Port" GridPane.rowIndex="1" GridPane.columnIndex="0" minWidth="80"/>
+    <HBox spacing="10" GridPane.rowIndex="1" GridPane.columnIndex="1">
+        <TextField fx:id="portField"/>
+        <Button text="Cambiar Puerto"/>
+        <Button text="Copiar"/>
+    </HBox>
+</GridPane>
