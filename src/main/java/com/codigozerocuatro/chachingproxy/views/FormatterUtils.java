@@ -13,6 +13,9 @@ public class FormatterUtils {
     public static TextFormatter<String> numericWithRange(int min, int max) {
         return new TextFormatter<>(change -> {
             String newText = change.getControlNewText();
+            if (newText.isEmpty()) {
+                return change;
+            }
             if (newText.matches("\\d*")) {
                 try {
                     int value = Integer.parseInt(newText);
