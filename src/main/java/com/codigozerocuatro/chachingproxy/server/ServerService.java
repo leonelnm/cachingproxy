@@ -19,7 +19,10 @@ public class ServerService {
     }
 
     public void getServerConnections() {
-        System.out.println("Retrieving server connections: " + servers.size());
+        System.out.printf("[INFO] Conexiones activas: %d%n", servers.size());
+        servers.forEach((port, server) ->
+                System.out.printf(" - Puerto: %d, URL: %s%n", port, server.getOrigin())
+        );
     }
 
     public void stopServer(int port) {
@@ -37,8 +40,9 @@ public class ServerService {
         Server server = servers.get(oldPort);
         if (server != null) {
             server.stop();
-            Server oldServer = servers.remove(oldPort);
-            Server newServer = new Server(RandomPort.getRandomPort(), oldServer.getOrigin(), httpClient);
+            servers.remove(oldPort);
+            int newPort = RandomPort.getRandomPort();
+            Server newServer = new Server(newPort, server.getOrigin(), httpClient);
             newServer.start();
             servers.put(newServer.getPort(), newServer);
             System.out.println("Server port changed from " + oldPort + " to " + newServer.getPort());
@@ -51,9 +55,10 @@ public class ServerService {
     }
 
     public void stopAllServers() {
-        for (Server server : servers.values()) {
+        servers.forEach((port, server) -> {
             server.stop();
-        }
+            System.out.printf("[INFO] Servidor en puerto %d detenido.%n", port);
+        });
         servers.clear();
         System.out.println("All servers stopped.");
     }
